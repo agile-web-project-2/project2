@@ -1,10 +1,10 @@
 extends layout
 
 block content
-  if (!user)
-    a(href="/login") Login
+  h1.cover-heading Welcome to Pairletes.
   br
-  a(href="/register") Register
-    if (user)
-      p You are currently logged in as #{user.username}
-      a(href="/logout") Logout
+  p.lead Pairletes is a fitness matchmaking app.
+  p.lead We want to pair you up with your dream fitness partner!
+  br
+  p.lead
+    a.btn.btn-lg.btn-default(href='#') Find a Match!

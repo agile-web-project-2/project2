@@ -1,8 +1,16 @@
 doctype html
-html
+html(lang='en')
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Pairletes is a fitness matchmaking app.')
+    meta(name='author', content='Matt Seneque, Kieran Quirke-Brown and Debbie Yung')
+    title Pairletes
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/style.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Lobster+Two', rel='stylesheet')
+
       
     script(src="/socket.io/socket.io.js")
     script(src="http://code.jquery.com/jquery-1.11.1.js")
@@ -26,9 +34,32 @@ html
         //- });
 
   body
-
-    #content(width='50%', float='left')    
-      block content
+    .site-wrapper
+          .site-wrapper-inner
+            .cover-container
+              .masthead.clearfix
+                .inner
+                  h3.masthead-brand.logo 
+                    a.logo(href="/") Pairletes
+                  nav
+                    ul.nav.masthead-nav
+                      if (!user)
+                        li.active
+                          a(href="/login") Login
+                      li 
+                        a(href="/register") Register
+                      li
+                        a(href="/about") About
+                      if (user)
+                        li
+                          p You are currently logged in as #{user.username}
+                          a(href="/logout") Logout
+              .inner.cover    
+                block content
+              .mastfoot
+                .inner
+                  p
+                    &copy; Matt Seneque, Kieran Quirke-Brown and Debbie Yung
 
       
     //- #chatwindow(width='20%', float='right')
@@ -38,3 +69,7 @@ html
     //-   form(action="", id='msgForm', onSubmit='return false;')
     //-       input(id="message" autocomplete="off")
     //-       button(type='button', onClick='send();') Send
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='../../dist/js/bootstrap.min.js')
+    script(src='../../assets/js/ie10-viewport-bug-workaround.js')
