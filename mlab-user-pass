@@ -1,6 +1,0 @@
-module.exports = {
-    user: "mlab",
-    pass: "password2017",
-    testUser: "test",
-    testPass: "password2017"
-};
