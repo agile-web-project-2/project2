@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ctrlOthers = require('../controllers/others');
+var ctrlLoginReg = require('../controllers/loginregister');
 
 // var passport = require('passport');
 
@@ -8,6 +9,12 @@ var ctrlOthers = require('../controllers/others');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Project 2' });
 });
+
+/* Login page */
+router.get('/login', ctrlLoginReg.login);
+
+/* Register page */
+router.get('/register', ctrlLoginReg.register);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);
