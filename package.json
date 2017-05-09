@@ -23,10 +23,6 @@
     "passport": "*"
   },
   "description": "App synced with Master branch, viewable at: https://pairletes.herokuapp.com/",
-  "main": "app.js",
-  "directories": {
-    "test": "test"
-  },
   "devDependencies": {},
   "repository": {
     "type": "git",
