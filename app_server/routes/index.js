@@ -11,7 +11,7 @@ var ctrlMatch = require('../controllers/matches');
 ****************************/
 router.get('/login', ctrlLoginReg.login);// Login page
 router.post('/login', passport.authenticate('local'), ctrlLoginReg.loginPOST);// Login page
-router.get('/logout', ctrlLoginReg.logout);// Logout page 
+router.get('/logout', ctrlLoginReg.logout);// Logout page
 router.get('/register', ctrlLoginReg.register);// Register page
 router.post('/register', ctrlLoginReg.registerPOST);// Register page
 router.get('/editProfile', ctrlLoginReg.editProfile);// Find Edit Profile page
@@ -27,7 +27,7 @@ router.get('/findMatch', ctrlMatch.match);
 *    'others' Controller
 ****************************/
 router.get('/', ctrlOthers.homepage);// Home page
-router.get('/about', ctrlOthers.about);// Other pages 
+router.get('/about', ctrlOthers.about);// Other pages
 
 
 module.exports = router;

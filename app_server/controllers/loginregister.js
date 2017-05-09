@@ -99,7 +99,7 @@ module.exports.registerPOST = function(req, res) {
 }
 
 /*********************
-*  'Edit Profile' page 
+*  'Edit Profile' page
 **********************/
 /*GET*/
 module.exports.editProfile = function(req, res) {

@@ -1,13 +1,24 @@
 extends layout
 
 block content
-  .container
-    h1 Registration Page
-    p Register here
+  h1 Register
+  .frame
+    p Enter your details here
     br
     form(action="/register",method="post")
-      label(for='email') Enter Email:
-      input(id='email', type = 'email', name = 'email')
-      label(for='password') Enter Password
-      input(id='password',type ='password', name='password')
-      input(type='submit', value='Register')
+      .form-group
+        label(for='email') Email:
+        |  
+        input#email.form-control(type='email', placeholder='Enter email', name='email')
+      .form-group
+        label(for='pwd') Password:
+        |  
+        input#pwd.form-control(type='password', placeholder='Enter password', name='pwd')
+      .checkbox
+        label
+          input(type='checkbox', name='remember')
+          |  Remember me
+      |  
+      input.btn.btn-default(type='submit', value='Submit')
+
+      
