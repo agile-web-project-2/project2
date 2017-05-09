@@ -31,38 +31,23 @@ var _showError = function (req, res, status) {
 /******************
 *  'login' page
 *******************/
-/* GET */
+/*GET*/
 module.exports.login = function(req, res) {
-    console.log('req: ' + req);
-    console.log('req.user: ' + req.user);
     res.render('login', {
-        title: 'Login',
-        user: req.user
+        title: 'Login'
     });
 };
-/* POST */
-module.exports.loginPOST = function(req, res) {
-    res.redirect('/');
-};
-
-/******************
-*  'logout' page
-*******************/
-/* GET */
-module.exports.logout = function(req, res) {
-    req.logout();
-    res.redirect('/');
-}
 
 /******************
 *  'register' page
 *******************/
-/* GET  */
+/*GET*/
 module.exports.register = function(req, res) {
     res.render('register', {
         title: 'Register'
     });
 };
+
 /*POST*/
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
@@ -96,3 +81,13 @@ module.exports.registerPOST = function(req, res) {
         });
     }
 }
+
+/*********************
+*  'Edit Profile' page 
+**********************/
+/*GET*/
+module.exports.editProfile = function(req, res) {
+    res.render('editProfile', {
+        title: 'Edit Profile'
+    });
+};

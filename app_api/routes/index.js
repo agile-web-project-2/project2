@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var ctrlProfiles = require('../controllers/profiles');
 var ctrlMatches = require('../controllers/matches');
-var ctrlAccounts = require('../controllers/accounts');
 
 
 /***************************
