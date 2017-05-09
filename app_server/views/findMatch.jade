@@ -1,5 +1,25 @@
 extends layout
 
 block content
-  #banner.page-header
-    h1 Find A Match
+  h1 Find A Match
+  .frame
+    p Enter your details here
+    br
+    form(action="/findMatch",method="post")
+      .form-group
+        label(for='activity') Activity:
+        |  
+        input#activity.form-control(type='text', placeholder='Enter an activity', name='activity')
+      .form-group
+        label(for='gender') Gender:
+        select#gender.form-control
+          option Any
+          option Male
+          option Female
+      .form-group
+        label(for='location') Location:
+        |  
+        input#location.form-control(type='text', placeholder='Enter a location', name='location')
+
+      |  
+      input.btn.btn-default(type='submit', value='Match Me!')
