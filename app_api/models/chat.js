@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 
+//Defines how chat messages are stored in database
 var chatSchema = new mongoose.Schema({
     participants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profile'
-    }]
-    chatLog: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Message'
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }]
 });
 
-mongoose.model('Chat', chatSchema, 'chats');
+module.exports = mongoose.model("chat", chatSchema);
+
+
+
