@@ -6,17 +6,8 @@ block content
     p Register here
     br
     form(action="/register",method="post")
-      div
-        label email
-        input(type="email",name="email")
-
-      div
-        label Password
-        input(type="password",name="password")
-
-      div
-        input(type="submit",value="Register")
-
-      div
-        if (errMessage)
-          p #{errMessage}
+      label(for='email') Enter Email:
+      input(id='email', type = 'email', name = 'email')
+      label(for='password') Enter Password
+      input(id='password',type ='password', name='password')
+      input(type='submit', value='Register')
