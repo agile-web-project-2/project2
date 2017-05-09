@@ -48,6 +48,14 @@ module.exports.loginPOST = function(req, res) {
     res.redirect('/');
 };
 
+/******************
+*  'logout' page
+*******************/
+/* GET */
+module.exports.logout = function(req, res) {
+    req.logout();
+    res.redirect('/');
+}
 
 /******************
 *  'register' page
@@ -60,19 +68,21 @@ module.exports.register = function(req, res) {
 };
 /*POST*/
 module.exports.registerPOST = function(req, res, next) {
-    Account.register(new Account({username: req.body.email}), req.body.password, function(err, account) {
-        if (err) {
-            console.log('There was an error while registering the email!', err);
-            // return res.render('register', { account : account });
-            return next(err);
-        }
-        console.log('The email is registered!');
-        // Authenticate newly registered user and reedirect them to the home page
-        // passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
-        // });
-    });
+    Account.register(new Account({username: req.body.email}), req.body.password,
+        function(err, account) {
+            if (err) {
+                console.log('There was an error while registering the email!', err);
+                console.log('account: ' + account);
+                return res.render('register', { account: account, errMessage: err });
+                // return next(err);
+            }
+            console.log('The email is registered!');
+            res.redirect('/login');
+        });
 };
+
+
+/***********************************************************************************/
 
 /* POST action to register a new user */
 /* /register */

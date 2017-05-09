@@ -16,3 +16,7 @@ block content
 
       div
         input(type="submit",value="Register")
+
+      div
+        if (errMessage)
+          p #{errMessage}

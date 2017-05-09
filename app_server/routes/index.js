@@ -15,10 +15,7 @@ router.get('/login', ctrlLoginReg.login);
 router.post('/login', passport.authenticate('local'), ctrlLoginReg.loginPOST);
 
 /* Logout page */
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
+router.get('/logout', ctrlLoginReg.logout);
 
 /* Register page */
 router.get('/register', ctrlLoginReg.register);
