@@ -173,3 +173,16 @@ body {
     width: 700px;
   }
 }
+
+
+
+
+/*  Custom styles start here */
+
+.frame {
+  padding: 20px;
+}
+
+.regbox {
+  margin-bottom: 20px;
+}

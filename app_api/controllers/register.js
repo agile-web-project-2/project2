@@ -1,13 +1,13 @@
 /*require('../models/db');
 var mongoose = require('mongoose');
-var account = mongoose.model('Account'); 
+var account = mongoose.model('Account');
 
 var sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
 
- // GET 
+ // GET
 
 router.get('/register', function(req, res) {
       res.render('register', { });
@@ -15,8 +15,8 @@ router.get('/register', function(req, res) {
 
 router.post('/register', function(req, res) {
       Account.
-        register(new Account({ username : req.body.username }), 
-             req.body.password, 
+        register(new Account({ username : req.body.username }),
+             req.body.password,
          function(err, account) {
                    if (err) {
                      return res.render('register', { account : account });
