@@ -1,25 +1,27 @@
-require('../models/db');
-var mongoose = require('mongoose');
-var account = mongoose.model('Account'); 
+var Account = require('../models/account');
 
 var sendJsonResponse = function(res, status, content) {
     res.status(status);
     res.json(content);
 };
 
-/* POST - Adds a new account to the database */
-/* /api/account */
-module.exports.addNewAccount = function(req, res) {
-    Account.
-        register(new Account({ username : req.body.username }), 
-            req.body.password, 
-            function(err, account) {
-                if (err) {
-                    return res.render('register', { account : account });
-                }
-                passport.authenticate('local')(req, res, function () {
-                    res.redirect('/');
-                });
+
+/*******************
+*    /api/account 
+********************/
+/*POST*/
+/* Adds a new account to the database  */
+module.exports.accountPOSTapi = function(req, res) {
+    Account.register(new Account({username: req.body.email}), req.body.password,
+        function(err, account) {
+            if (err) {
+                console.log('There was an error while registering the email!', err);
+                console.log('account: ' + account);
+                sendJsonResponse(res, 400, err);
+            } else {
+                console.log('The email is registered!');
+                sendJsonResponse(res, 201, account);
             }
-        );
-}
+            
+        });
+};

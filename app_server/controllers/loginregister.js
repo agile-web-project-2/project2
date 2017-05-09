@@ -1,6 +1,3 @@
-var passport = require('passport');
-var Account = require('../../app_api/models/account'); // Remove this from here and put inside the API
-
 /* Request needed to GET data to the views */
 var request = require('request');
 var apiOptions = {
@@ -67,26 +64,8 @@ module.exports.register = function(req, res) {
     });
 };
 /*POST*/
-module.exports.registerPOST = function(req, res, next) {
-    Account.register(new Account({username: req.body.email}), req.body.password,
-        function(err, account) {
-            if (err) {
-                console.log('There was an error while registering the email!', err);
-                console.log('account: ' + account);
-                return res.render('register', { account: account, errMessage: err });
-                // return next(err);
-            }
-            console.log('The email is registered!');
-            res.redirect('/login');
-        });
-};
-
-
-/***********************************************************************************/
-
-/* POST action to register a new user */
-/* /register */
-/*module.exports.addToRegister = function(req, res) {
+/* action to register a new user */
+module.exports.registerPOST = function(req, res) {
     var requestOptions, path, postdata;
     path = "/api/account";
     postdata = {
@@ -116,6 +95,4 @@ module.exports.registerPOST = function(req, res, next) {
                 }
         });
     }
-
-}*/
-
+}

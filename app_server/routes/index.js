@@ -5,24 +5,21 @@ var ctrlOthers = require('../controllers/others');
 var ctrlLoginReg = require('../controllers/loginregister');
 
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Project 2', user: req.user });
-});
+/***************************
+* 'loginregister' Controller
+****************************/
+router.get('/login', ctrlLoginReg.login);// Login page
+router.post('/login', passport.authenticate('local'), ctrlLoginReg.loginPOST);// Login page
+router.get('/logout', ctrlLoginReg.logout);// Logout page 
+router.get('/register', ctrlLoginReg.register);// Register page
+router.post('/register', ctrlLoginReg.registerPOST);// Register page
 
-/* Login page */
-router.get('/login', ctrlLoginReg.login);
-router.post('/login', passport.authenticate('local'), ctrlLoginReg.loginPOST);
 
-/* Logout page */
-router.get('/logout', ctrlLoginReg.logout);
-
-/* Register page */
-router.get('/register', ctrlLoginReg.register);
-router.post('/register', ctrlLoginReg.registerPOST);
-
-/* Other pages */
-router.get('/about', ctrlOthers.about);
+/***************************
+*    'others' Controller
+****************************/
+router.get('/', ctrlOthers.homepage);// Home page
+router.get('/about', ctrlOthers.about);// Other pages 
 
 
 module.exports = router;

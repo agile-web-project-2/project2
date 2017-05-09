@@ -1,4 +1,4 @@
-require('../models/db');
+/*require('../models/db');
 var mongoose = require('mongoose');
 var activity = mongoose.model('Activity'); 
 
@@ -25,9 +25,10 @@ module.exports.activitiesListByDistance = function(req, res) {
 });
 return;
 }
-Check lng and lat
-query parameters
-exist in right
-format; return a
-404 error and
-message if not
+// Check lng and lat
+// query parameters
+// exist in right
+// format; return a
+// 404 error and
+// message if not
+*/
