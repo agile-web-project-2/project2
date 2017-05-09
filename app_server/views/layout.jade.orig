@@ -58,7 +58,7 @@ html(lang='en')
                 block content
               .mastfoot
                 .inner
-                  p &copy; 2017 Matthew Seneque, Kieran Quirke-Brown and Debbie Yung 
+                  p &copy; Matthew Seneque, Kieran Quirke-Brown and Debbie Yung 2017
 
 
       
