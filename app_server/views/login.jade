@@ -1,19 +1,25 @@
 extends layout
 
 block content
-  #banner.page-header
-     h2 Log In
-
+  h1 Login
+  .frame
+    p Enter your details here
+    br
     form(action="/login",method="post")
-      div
-        label Username
-        input(type="text",name="username")
-
-      div
-        label Password
-        input(type="password",name="password")
-
-      div
-        input(type="submit",value="Log In")
+      .form-group
+        label(for='email') Email:
+        |  
+        input#email.form-control(type='email', placeholder='Enter email', name='email')
+      .form-group
+        label(for='pwd') Password:
+        |  
+        input#pwd.form-control(type='password', placeholder='Enter password', name='pwd')
+      .checkbox
+        label
+          input(type='checkbox', name='remember')
+          |  Remember me
+      |  
+      input.btn.btn-default(type='submit', value='Login')
+        
 
     
