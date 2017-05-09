@@ -33,10 +33,26 @@ var _showError = function (req, res, status) {
 *******************/
 /*GET*/
 module.exports.login = function(req, res) {
+    console.log('req: ' + req);
+    console.log('req.user: ' + req.user);
     res.render('login', {
-        title: 'Login'
+        title: 'Login',
+        user: req.user
     });
 };
+/* POST */
+module.exports.loginPOST = function(req, res) {
+    res.redirect('/');
+};
+
+/******************
+*  'logout' page
+*******************/
+/* GET */
+module.exports.logout = function(req, res) {
+    req.logout();
+    res.redirect('/');
+}
 
 /******************
 *  'register' page
