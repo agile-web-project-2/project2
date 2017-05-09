@@ -7,13 +7,13 @@ block content
     br
     form(action="/login",method="post")
       .form-group
-        label(for='email') Email:
+        label(for='username') Email:
         |  
-        input#email.form-control(type='email', placeholder='Enter email', name='email')
+        input#email.form-control(type='email', placeholder='Enter email', name='username')
       .form-group
-        label(for='pwd') Password:
+        label(for='password') Password:
         |  
-        input#pwd.form-control(type='password', placeholder='Enter password', name='pwd')
+        input#pwd.form-control(type='password', placeholder='Enter password', name='password')
       .checkbox
         label
           input(type='checkbox', name='remember')

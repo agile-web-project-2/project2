@@ -11,6 +11,7 @@ var ctrlMatch = require('../controllers/matches');
 ****************************/
 router.get('/login', ctrlLoginReg.login);// Login page
 router.post('/login', passport.authenticate('local'), ctrlLoginReg.loginPOST);// Login page
+// router.post('/login', passport.authenticate('local'), function(req, res) {res.redirect('/');});// Login page
 router.get('/logout', ctrlLoginReg.logout);// Logout page
 router.get('/register', ctrlLoginReg.register);// Register page
 router.post('/register', ctrlLoginReg.registerPOST);// Register page
