@@ -3,11 +3,16 @@ extends layout
 block content
   .container
     h1 Registration Page
-    p Register here #{title}
+    p Register here
     br
     form(action="/register",method="post")
-      label(for='email') Enter Email:
-      input(id='email', type = 'email', name = 'email')
-      label(for='password') Enter Password
-      input(id='password',type ='password', name='password')
-      input(type='submit', value='Register')
+      div
+        label email
+        input(type="email",name="email")
+
+      div
+        label Password
+        input(type="password",name="password")
+
+      div
+        input(type="submit",value="Register")

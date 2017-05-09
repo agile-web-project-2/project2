@@ -1,6 +1,6 @@
 require('../models/db');
 var mongoose = require('mongoose');
-var profile = mongoose.model('Profile'); 
+var activity = mongoose.model('Activity'); 
 
 var sendJsonResponse = function(res, status, content) {
     res.status(status);

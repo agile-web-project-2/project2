@@ -1,6 +1,8 @@
+var passport = require('passport');
+var Account = require('../../app_api/models/account'); // Remove this from here and put inside the API
+
 /* Request needed to GET data to the views */
 var request = require('request');
-/* describes the server location (needed for request)*/
 var apiOptions = {
   server : "http://localhost:3000"
 };
@@ -29,14 +31,17 @@ var _showError = function (req, res, status) {
 };
 
 /* GET 'login' page */
+
 module.exports.login = function(req, res) {
+    console.log('req: ' + req);
+    console.log('req.user: ' + req.user);
     res.render('login', {
-        title: 'Login'
+        title: 'Login',
+        user: req.user
     });
 };
 
 /* GET 'register' page */
-/* /register */
 module.exports.register = function(req, res) {
     res.render('register', {
         title: 'Register'
@@ -77,16 +82,17 @@ module.exports.register = function(req, res) {
     }
 
 }*/
-module.exports.addToRegister = function(req, res) {
-      Account.
-        register(new Account({ username : req.body.username }), 
-             req.body.password, 
-         function(err, account) {
-                   if (err) {
-                     return res.render('register', { account : account });
-                   }
-                   passport.authenticate('local')(req, res, function () {
-                     res.redirect('/');
-                     });
-                 });
+module.exports.addToRegister = function(req, res, next) {
+    Account.register(new Account({username: req.body.email}), req.body.password, function(err, account) {
+        if (err) {
+            console.log('There was an error while registering the email!', err);
+            // return res.render('register', { account : account });
+            return next(err);
+        }
+        console.log('The email is registered!');
+        // Authenticate newly registered user and reedirect them to the home page
+        // passport.authenticate('local')(req, res, function () {
+            res.redirect('/');
+        // });
+    });
 };
