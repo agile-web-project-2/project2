@@ -11,3 +11,10 @@ module.exports.register = function(req, res) {
         title: 'Register'
     });
 };
+
+/* GET 'Edit Profile' page */
+module.exports.editProfile = function(req, res) {
+    res.render('editProfile', {
+        title: 'Edit Profile'
+    });
+};

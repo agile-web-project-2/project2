@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ctrlOthers = require('../controllers/others');
 var ctrlLoginReg = require('../controllers/loginregister');
+var ctrlMatch = require('../controllers/matches.js');
 
 // var passport = require('passport');
 
@@ -15,6 +16,12 @@ router.get('/login', ctrlLoginReg.login);
 
 /* Register page */
 router.get('/register', ctrlLoginReg.register);
+
+/* Find Match page */
+router.get('/findMatch', ctrlMatch.match);
+
+/* Find Edit Profile page */
+router.get('/editProfile', ctrlLoginReg.editProfile);
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);
