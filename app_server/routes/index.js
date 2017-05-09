@@ -15,6 +15,8 @@ router.get('/login', ctrlLoginReg.login);
 
 /* Register page */
 router.get('/register', ctrlLoginReg.register);
+router.post('/register', ctrlLoginReg.addToRegister);
+
 
 /* Other pages */
 router.get('/about', ctrlOthers.about);
