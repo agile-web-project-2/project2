@@ -1,5 +1,17 @@
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 
+<<<<<<< HEAD
+// var messageSchema = new mongoose.Schema({
+//     username: String,
+//     message: String,
+//     timePosted: {
+//         type: Date,
+//         "default": Date.now
+//     }
+// });
+
+// mongoose.model('Message', messageSchema, 'messageLog');
+=======
 var MessageSchema = new mongoose.Schema({
     chatId: {
         type: Schema.Types.ObjectId,
@@ -19,4 +31,4 @@ var MessageSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Message', MessageSchema);
-
+>>>>>>> Kieran
