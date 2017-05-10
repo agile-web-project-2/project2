@@ -49,13 +49,13 @@ router.delete('/profiles/:userid/matchAccept/:matchid', ctrlMatches.matchesAccep
 // Set chat routes as a subgroup/middleware to apiRoutes
 apiRoutes.use('/chat', chatRoutes);
 // View messages to and from authenticated user
-chatRoutes.get('/', requireAuth, ChatController.getChats);
+chatRoutes.get('/', ChatController.getChats);
 // Retrieve single conversation
-chatRoutes.get('/:chatId', requireAuth, ChatController.getConversation);
+chatRoutes.get('/:chatId', ChatController.getChat);
 // Send reply in conversation
-chatRoutes.post('/:chatId', requireAuth, ChatController.sendReply);
+chatRoutes.post('/:chatId', ChatController.sendReply);
 // Start new conversation
-chatRoutes.post('/new/:recipient', requireAuth, ChatController.newChat);
+chatRoutes.post('/new/:recipient', ChatController.newChat);
 
 
 module.exports = router;

@@ -1,9 +1,9 @@
 "use strict"
 var Chat = require('../models/chat'),
     Message = require('../models/message'),
-    User = require('../models/user');
+    //User = require('../models/user');
 
-exports.getChats = function(req, res, next){
+getChats = function(req, res, next){
     //displays one message from conversation
     Chat.find({ participants: req.user._id})
         .select('_id')
@@ -113,25 +113,7 @@ exports.sendReply = function(req, res, next){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+exports.getChats = getChats;
 
 
 
