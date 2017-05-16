@@ -1,20 +1,31 @@
 
 var should = require('chai').should();
+var mongoose = require('mongoose');
 
 /************************************************************************************
  * For local Mongo Server start server e.g ( sudo mongod --dbpath /var/lib/mongodb/ ) 
  ************************************************************************************/
 
-var mongoose = require('mongoose');
 var mlab = require('../mlab-user-pass.js');
 
-require('../app_api/models/profile.js');
-var Profile = mongoose.model('Profile');
 var Account = require('../app_api/models/account');
 var db;
 
+/*********************************
+ *     Create Dummy Model
+ *********************************/
 
-describe('Account: Adds new account to the database', function() {
+var dummySchema = new mongoose.Schema({
+    testString: String
+});
+var Dummy = mongoose.model('Dummy', dummySchema, 'dummy');
+
+
+/**********************************************
+ *  Start describing what the tests should do
+ **********************************************/
+
+describe('Account: Adds new account to the database (If fails: startup local "mongod" )', function() {
     
     before(function(done){
         db = mongoose.connect('mongodb://localhost:27017/test');
@@ -22,15 +33,21 @@ describe('Account: Adds new account to the database', function() {
     });
 
     beforeEach(function(done) {
-        // create profile instance
-        Account.register(new Account({username: 'user@test.com', name: 'testUserName', gender: 'male'}), 'p@s5w0Rd',
+        // create account instance
+        var account_instance = new Account({
+            username: 'user@test.com', 
+            name: 'testUserName', 
+            gender: 'male'
+        });
+
+        Account.register((account_instance), 'p@s5w0Rd',
         function(err, account) {
             if (err) {
                 console.log('There was an error while registering the email!', err);
                 console.log('account: ' + account);
                 // sendJsonResponse(res, 400, err);
             } else {
-                console.log('The email is registered!');
+                // console.log('The email is registered!');
                 // sendJsonResponse(res, 201, account);
             }
             done();
@@ -38,19 +55,19 @@ describe('Account: Adds new account to the database', function() {
     });
 
     it('should find an account by email address', function(done) {
-    Account.findOne({ username: 'user@test.com' }, function(err, account) {
-      account.username.should.eql('user@test.com');
-      console.log("   email: ", account.username);
-      done(); //Call done to tell mocha that we are done with this test
-      });
+        Account.findOne({ username: 'user@test.com' }, function(err, account) {
+            account.username.should.eql('user@test.com');
+            console.log("   email: ", account.username);
+            done(); //Call done to tell mocha that we are done with this test
+        });
     });
 
     it('should store password as hash', function(done) {
-    Account.findOne({ username: 'user@test.com' }, { hash: 1 }, function(err, account) {
-      account.hash.should.exist;
-      console.log("   hash: ", account.hash);
-      done(); //Call done to tell mocha that we are done with this test
-      });
+        Account.findOne({ username: 'user@test.com' }, { hash: 1 }, function(err, account) {
+            account.hash.should.exist;
+            console.log("   hash: ", account.hash);
+            done(); //Call done to tell mocha that we are done with this test
+        });
     });
 
 
@@ -70,13 +87,6 @@ describe('Account: Adds new account to the database', function() {
 /*********************
     TEST REMOTE DB
 **********************/
-
-var mongoose = require('mongoose');
-var dummySchema = new mongoose.Schema({
-    testString: String
-});
-var Dummy = mongoose.model('Dummy', dummySchema, 'dummy');
-
 
 describe('Remote Test Database Connect', function(){
     before(function(done){//before the test begins
