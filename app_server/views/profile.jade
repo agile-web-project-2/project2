@@ -2,6 +2,10 @@ extends layout
 
 block content
   h1 Profile
-  p Your profile here
-  p Email: #{email.username}
-  
+  br
+  p Name: #{user.name}
+  p Email: #{user.username}
+  p Gender: #{user.gender}
+  br
+  a(href='/editProfile')
+    button.btn.btn-default(type='button') Edit Profile

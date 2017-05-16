@@ -108,6 +108,17 @@ module.exports.registerPOST = function(req, res) {
 /*GET*/
 module.exports.editProfile = function(req, res) {
     res.render('editProfile', {
-        title: 'Edit Profile'
+        title: 'Edit Profile',
+        user: req.user
+    });
+};
+
+/*GET*/
+module.exports.profile = function(req, res) {
+    res.render('profile', {
+        title: 'Profile',
+        user: req.user,
+        name: req.name,
+        gender: req.gender
     });
 };

@@ -37,26 +37,29 @@ html(lang='en')
     .site-wrapper
           .site-wrapper-inner
             .cover-container
-            
               .masthead.clearfix
                 if (user)
                   .login-status
-                  p Welcome #{user.username}
+                  p Welcome, #{user.username}!
                 .inner
                   h3.masthead-brand.logo 
                     a.logo(href="/") Pairletes              
                         
                   nav
                     ul.nav.masthead-nav
-                      if (!user)
-                        li.active
-                          a(href="/login") Login
-                      li 
-                        a(href="/register") Register
                       li
                         a(href="/about") About
-                      if (user)
+                        
+                      if (!user)
                         li
+                          a(href="/login") Login
+                        li 
+                          a(href="/register") Register
+                      
+                      if (user)
+                        li 
+                          a(href="/profile") Profile
+                        li.active
                           a(href="/logout") Logout
                           
                 
