@@ -7,12 +7,12 @@ var sendJsonResponse = function(res, status, content) {
 
 
 /*******************
-*    /api/account 
+*    /api/account
 ********************/
 /*POST*/
 /* Adds a new account to the database  */
 module.exports.accountPOSTapi = function(req, res) {
-    Account.register(new Account({username: req.body.email}), req.body.password,
+    Account.register(new Account({username: req.body.email, name: req.body.name, gender: req.body.gender}), req.body.password,
         function(err, account) {
             if (err) {
                 console.log('There was an error while registering the email!', err);
@@ -22,6 +22,6 @@ module.exports.accountPOSTapi = function(req, res) {
                 console.log('The email is registered!');
                 sendJsonResponse(res, 201, account);
             }
-            
+
         });
 };

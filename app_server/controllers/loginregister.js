@@ -71,7 +71,9 @@ module.exports.registerPOST = function(req, res) {
     path = "/api/account";
     postdata = {
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        name: req.body.name,
+        gender: req.body.gender
     };
     requestOptions = {
         url : apiOptions.server + path,
@@ -80,6 +82,8 @@ module.exports.registerPOST = function(req, res) {
     };
     console.log(postdata.email);
     console.log(postdata.password);
+    console.log(postdata.name);
+    console.log(postdata.gender);
     if (!postdata.email || !postdata.password) {
     res.redirect('/register?err=val');
     } else {
