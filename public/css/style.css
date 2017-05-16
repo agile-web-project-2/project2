@@ -60,7 +60,7 @@ body {
 
 /* Padding for spacing */
 .inner {
-  padding: 30px;
+  padding: 10px;
 }
 
 
@@ -185,4 +185,8 @@ body {
 
 .regbox {
   margin-bottom: 20px;
+}
+
+.login-status {
+  margin-top: 20px;
 }

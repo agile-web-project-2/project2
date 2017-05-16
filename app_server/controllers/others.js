@@ -9,3 +9,10 @@ module.exports.about = function(req, res) {
 module.exports.homepage = function(req, res, next) {
     res.render('index', { title: 'Project 2', user: req.user });
 };
+
+module.exports.profile = function(req, res) {
+    res.render('profile', {
+        title: 'Profile',
+        email: req.user
+    });
+};

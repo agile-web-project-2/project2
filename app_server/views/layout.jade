@@ -37,10 +37,15 @@ html(lang='en')
     .site-wrapper
           .site-wrapper-inner
             .cover-container
+            
               .masthead.clearfix
+                if (user)
+                  .login-status
+                  p Welcome #{user.username}
                 .inner
                   h3.masthead-brand.logo 
-                    a.logo(href="/") Pairletes
+                    a.logo(href="/") Pairletes              
+                        
                   nav
                     ul.nav.masthead-nav
                       if (!user)
@@ -52,8 +57,10 @@ html(lang='en')
                         a(href="/about") About
                       if (user)
                         li
-                          p You are currently logged in as #{user.username}
                           a(href="/logout") Logout
+                          
+                
+                  
               .inner.cover    
                 block content
               .mastfoot

@@ -29,6 +29,7 @@ router.get('/findMatch', ctrlMatch.match);
 ****************************/
 router.get('/', ctrlOthers.homepage);// Home page
 router.get('/about', ctrlOthers.about);// Other pages
+router.get('/profile', ctrlOthers.profile);// Profile page... may change later
 
 
 module.exports = router;
