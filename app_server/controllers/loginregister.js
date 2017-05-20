@@ -67,6 +67,7 @@ module.exports.register = function(req, res) {
 /*POST*/
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
+    //Convert rest of form to json for db
     var requestOptions, path, postdata;
     path = "/api/account";
     postdata = {
@@ -75,6 +76,24 @@ module.exports.registerPOST = function(req, res) {
         name: req.body.name,
         gender: req.body.gender
     };
+
+    // Form validator
+    req.checkBody(postdata.name, 'Name field is required').notEmpty();
+    req.checkBody(postdata.email, 'Email field is required').notEmpty();
+    req.checkBody(postdata.email, 'Email field is not valid').isEmail();
+    req.checkBody(postdata.password, 'Password field is required').notEmpty();
+
+    /*Check Errors*/
+    var errors = req.validationErrors();
+
+    if(errors){
+      res.render('register', {
+        errors: errors
+      });
+    }
+
+
+
     requestOptions = {
         url : apiOptions.server + path,
         method : "POST",
@@ -84,6 +103,11 @@ module.exports.registerPOST = function(req, res) {
     console.log(postdata.password);
     console.log(postdata.name);
     console.log(postdata.gender);
+
+    if (!postdata.email) {
+
+    }
+
     if (!postdata.email || !postdata.password) {
     res.redirect('/register?err=val');
     } else {
@@ -93,6 +117,7 @@ module.exports.registerPOST = function(req, res) {
                 } else if (response.statusCode === 201) {
                     res.redirect('/login');
                 } else if (response.statusCode === 400 && body.email && body.email === "ValidationError" ) {
+                    res.flash('danger', 'Invalid');
                     res.redirect('/register?err=val');
                 } else {
                     console.log(body);
