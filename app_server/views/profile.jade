@@ -3,11 +3,106 @@ extends layout
 block content
   h1 Profile
   br
-  p Name: #{user.name}
-  p Email: #{user.username}
-  p Gender: #{user.gender}
-  p Birthday: #{birthdate}
-  br
-  a(href='/editProfile')
-    button.btn.btn-default(type='button') Edit Profile
+  form(action="/update" method="post")
+    .form-group
+      br
+      .col-md-6 Name:
+        input.form-control(type='text', value='#{user.name}' readonly)
+      .col-md-6
+      
+    br
+    .form-group
+      br
+      .col-md-6 Email:
+        input.form-control(type='text', value='#{user.username}' readonly)
+      .col-md-6
+      
+    br
+    .form-group
+      br
+      .col-md-6 Gender:
+        input.form-control(type='text', value='#{user.gender}' readonly)
+      .col-md-6
+      
+    br
+    .form-group
+      br
+      .col-md-6 Birthday:
+        input.form-control(type='text', value='#{birthdate}' readonly)
+      .col-md-6
+    
+    br
+    .form-group
+      br
+      .col-md-6 Gym:
+        input#gym.form-control(type='text' value='')
+      .col-md-6
+        
+    br
+    .form-group
+      br
+      .col-md-6 Address:
+        input#street.form-control(type='text' value='')
+        input#city.form-control(type='text' value='')
+        input#Country.form-control(type='text' value='')
+        br
+      .col-md-6
+        label About Me:      
+        textarea#aboutMe.form-control(rows='4', cols='20')
+        br
+
+  //NEED TO DO AN POST REQ UPDATE OF USER'S PROFILE ON SERVER SIDE
+  a(href='#')
+    button.btn.btn-default(type='button') Update Profile
+    
+    
+  script.
+    //Populate with GYM data from db
+    var gymVar = "#{user.gym}";
+    if (gymVar == ''){
+      document.getElementById('gym').placeholder = "Enter a gym";
+    } else {
+      document.getElementById('gym').value = gymVar;
+    }
+    
+    //Populate with DESCRIPTION data from db
+    var aboutMeVar = "#{user.aboutMe}";
+    if (aboutMeVar == ''){
+      document.getElementById('aboutMe').placeholder = "Enter a description";
+    } else {
+      document.getElementById('aboutMe').value = aboutMeVar;
+    }
+    
+    //Populate with ADDRESS data from db
+    var streetVar = "#{streetAddress}"; //use unique var from loginregister.js GET request
+    if (streetVar == ''){
+      document.getElementById('street').placeholder = "Street";
+    } else {
+      document.getElementById('street').value = streetVar;
+    }
+
+    var cityVar = "#{cityAddress}";
+    if (cityVar == ''){
+      document.getElementById('city').placeholder = "City";
+    } else {
+      document.getElementById('city').value = cityVar;
+    }
+    
+    var countrytVar = "#{countryAddress}";
+    if (countrytVar == ''){
+      document.getElementById('Country').placeholder = "Country";
+    } else {
+      document.getElementById('Country').value = countrytVar;
+    }
+    
+  
+  //- p Name: #{user.name}
+  //- p Email: #{user.username}
+  //- p Gender: #{user.gender}
+  //- p Birthday: #{birthdate}
+  //- br
+  //- input.form-control(type='text', value='#{user.name}')
+  //- br
+  //- a(href='/editProfile')
+  //-   button.btn.btn-default(type='button') Edit Profile
   

@@ -5,7 +5,7 @@ block content
   .frame
     p Enter your details here
     br
-    form.form-horizontal(action="/register" method="post" onsubmit="validate(event)")
+    form(action="/register" method="post")
       .form-group
         label(for='name') Name: 
         input#name.form-control(type='text', placeholder='Enter your name', name='name')
