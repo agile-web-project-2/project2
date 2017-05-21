@@ -30,11 +30,16 @@ block content
       //- .form-group
       //-   label Birthday: 
       //-   br 
-      //-   input#day-field.dobForm(type='text', placeholder='DD', maxlength="2", name='day')
-      //-   input#mth-field.dobForm(type='text', placeholder='MM', maxlength="2", name='month')
-      //-   input#yr-field.dobForm(type='text', placeholder='YYYY', maxlength="4", name='year')
-      //- 
+      //-   input#day.dobForm(type='text', placeholder='DD', maxlength="2", name='day')
+      //-   input#month.dobForm(type='text', placeholder='MM', maxlength="2", name='month')
+      //-   input#year.dobForm(type='text', placeholder='YYYY', maxlength="4", name='year')
+      
 
+      .form-group
+        label Birthday: 
+        br 
+        input#birthdate.form-control(type='text', placeholder='YYYY-MM-DD', maxlength="10", name='birthdate')
+      
                 
       input.btn.btn-default(type='submit', value='Register')
 

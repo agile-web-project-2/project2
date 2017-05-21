@@ -67,33 +67,6 @@ module.exports.register = function(req, res) {
 /*POST*/
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
-    //Convert rest of form to json for db
-    var requestOptions, path, postdata;
-    path = "/api/account";
-    postdata = {
-        email: req.body.email,
-        password: req.body.password,
-        name: req.body.name,
-        gender: req.body.gender
-    };
-
-    // Form validator
-    req.checkBody(postdata.name, 'Name field is required').notEmpty();
-    req.checkBody(postdata.email, 'Email field is required').notEmpty();
-    req.checkBody(postdata.email, 'Email field is not valid').isEmail();
-    req.checkBody(postdata.password, 'Password field is required').notEmpty();
-
-    /*Check Errors*/
-    var errors = req.validationErrors();
-
-    if(errors){
-      res.render('register', {
-        errors: errors
-      });
-    }
-
-
-
     requestOptions = {
         url : apiOptions.server + path,
         method : "POST",
