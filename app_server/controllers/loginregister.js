@@ -70,7 +70,7 @@ module.exports.register = function(req, res) {
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
     //Parse birthdate ready for mongodb
-    // var bday = req.body.yr + '-' + req.body.mth + '-' + req.body.day;
+    var bday = req.body.yr + '-' + req.body.mth + '-' + req.body.day;
     // console.log(bday);
     //Convert rest of form to json for db
     var requestOptions, path, postdata;
@@ -80,7 +80,7 @@ module.exports.registerPOST = function(req, res) {
         password: req.body.password,
         name: req.body.name,
         gender: req.body.gender,
-        birthdate: req.body.birthdate
+        birthdate: bday
     };
 
     requestOptions = {
