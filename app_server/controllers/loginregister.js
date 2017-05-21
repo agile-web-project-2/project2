@@ -67,6 +67,19 @@ module.exports.register = function(req, res) {
 /*POST*/
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
+    console.log(req.body.birthdate);
+    //Convert rest of form to json for db
+    var requestOptions, path, postdata;
+    path = "/api/account";
+    postdata = {
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.name,
+        gender: req.body.gender,
+        birthdate: req.body.birthdate
+    };
+
+
     requestOptions = {
         url : apiOptions.server + path,
         method : "POST",
