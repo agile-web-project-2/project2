@@ -22,21 +22,24 @@ block content
       br
       .col-md-6 Gender:
         input.form-control(type='text', value='#{user.gender}' readonly)
-      .col-md-6
+      .col-md-6 Interest 1:
+        input#interest1.form-control(type='text' value='')
       
     br
     .form-group
       br
       .col-md-6 Birthday:
         input.form-control(type='text', value='#{birthdate}' readonly)
-      .col-md-6
+      .col-md-6 Interest 2:
+        input#interest2.form-control(type='text' value='')
     
     br
     .form-group
       br
       .col-md-6 Gym:
         input#gym.form-control(type='text' value='')
-      .col-md-6
+      .col-md-6 Interest 3:
+        input#interest3.form-control(type='text' value='')
         
     br
     .form-group
@@ -57,6 +60,29 @@ block content
     
     
   script.
+    //Populate with INTEREST data from db
+    //Might change input text to dropdown box with pre-defined values later
+    var interest1Var = "#{interest1}"; //unique var
+    if (interest1Var == ''){
+      document.getElementById('interest1').placeholder = "Enter an interest e.g. Gym";
+    } else {
+      document.getElementById('interest1').value = interest1Var;
+    }
+    
+    var interest2Var = "#{interest2}"; //unique var
+    if (interest2Var == ''){
+      document.getElementById('interest2').placeholder = "Enter an interest e.g. Running";
+    } else {
+      document.getElementById('interest2').value = interest2Var;
+    }
+    
+    var interest3Var = "#{interest1}"; //unique var
+    if (interest3Var == ''){
+      document.getElementById('interest3').placeholder = "Enter an interest e.g. Tennis";
+    } else {
+      document.getElementById('interest3').value = interest3Var;
+    }
+    
     //Populate with GYM data from db
     var gymVar = "#{user.gym}";
     if (gymVar == ''){
