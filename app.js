@@ -5,8 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('cookie-session');
 var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
-var flash = require('connect-flash');
+// var expressValidator = require('express-validator');
+// var flash = require('connect-flash');
+
+
 
 // Pasport
 var passport = require('passport');

@@ -4,44 +4,49 @@ block content
   h1 Register
   .frame
     p Enter your details here
-      if errors
-        each error, i in errors
-          div.alert.alert-danger #{error.msg}
     br
-    form(action="/register",method="post")
+    form.form-horizontal(action="/register" method="post" onsubmit="validate(event)")
       .form-group
         label(for='name') Name: 
         input#name.form-control(type='text', placeholder='Enter your name', name='name')
+
         
       .form-group
         label(for='email') Email: 
         input#email.form-control(type='email', placeholder='Enter email', name='email')
+
         
       .form-group
         label(for='password') Password:  
         input#pwd.form-control(type='password', placeholder='Enter password', name='password', autocomplete="new-password")
+
         
       .form-group
         label(for='gender') Gender:  
         select#gender.form-control(name='gender')
           option(value='Female') Female
-          option(value='Male') Male
-          
+          option(value='Male') Male     
+
+      .form-group
+          label Birthday: 
+          br 
+          input#birthdate.form-control(type='text', placeholder='YYYY-MM-DD', name='birthdate')
+
+        
       //- .form-group
       //-   label Birthday: 
       //-   br 
-      //-   input#day.dobForm(type='text', placeholder='DD', maxlength="2", name='day')
-      //-   input#month.dobForm(type='text', placeholder='MM', maxlength="2", name='month')
-      //-   input#year.dobForm(type='text', placeholder='YYYY', maxlength="4", name='year')
-      
+      //-   input#day.dobForm(type='text', placeholder='dd', name='day', maxlength=2)
+      //-   input#mth.dobForm(type='text', placeholder='mm', name='mth', maxlength=2)
+      //-   input#yr.dobForm(type='text', placeholder='yyyy', name='yr', maxlength=4)
+      //-   p lets just assume people will input the correct date for now
 
-      .form-group
-        label Birthday: 
-        br 
-        input#birthdate.form-control(type='text', placeholder='YYYY-MM-DD', maxlength="10", name='birthdate')
-      
-                
+              
       input.btn.btn-default(type='submit', value='Register')
 
       if (errMessage)
         p #{errMessage}
+        
+
+
+        

@@ -1,3 +1,5 @@
+var validator = require('validator');
+
 /* Request needed to GET data to the views */
 var request = require('request');
 var apiOptions = {
@@ -67,7 +69,9 @@ module.exports.register = function(req, res) {
 /*POST*/
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
-    console.log(req.body.birthdate);
+    //Parse birthdate ready for mongodb
+    // var bday = req.body.yr + '-' + req.body.mth + '-' + req.body.day;
+    // console.log(bday);
     //Convert rest of form to json for db
     var requestOptions, path, postdata;
     path = "/api/account";
@@ -79,20 +83,16 @@ module.exports.registerPOST = function(req, res) {
         birthdate: req.body.birthdate
     };
 
-
     requestOptions = {
-        url : apiOptions.server + path,
-        method : "POST",
-        json : postdata
+      url : apiOptions.server + path,
+      method : "POST",
+      json : postdata
     };
     console.log(postdata.email);
     console.log(postdata.password);
     console.log(postdata.name);
     console.log(postdata.gender);
-
-    if (!postdata.email) {
-
-    }
+    console.log(postdata.birthdate);
 
     if (!postdata.email || !postdata.password) {
     res.redirect('/register?err=val');
@@ -101,6 +101,7 @@ module.exports.registerPOST = function(req, res) {
                 if (err) {
                     console.log(err);
                 } else if (response.statusCode === 201) {
+                  //Success
                     res.redirect('/login');
                 } else if (response.statusCode === 400 && body.email && body.email === "ValidationError" ) {
                     res.flash('danger', 'Invalid');
@@ -126,10 +127,23 @@ module.exports.editProfile = function(req, res) {
 
 /*GET*/
 module.exports.profile = function(req, res) {
+  var x = new Date(req.user.birthdate);
+  var year = x.getFullYear();
+  var month = x.getMonth()+1;
+  var dt = x.getDate();
+
+  if (dt < 10) {
+  dt = '0' + dt;
+  }
+
+  if (month < 10) {
+  month = '0' + month;
+  }
+  x = year + '-' + month + '-' + dt;
+
     res.render('profile', {
         title: 'Profile',
         user: req.user,
-        name: req.name,
-        gender: req.gender
+        birthdate: x
     });
 };
