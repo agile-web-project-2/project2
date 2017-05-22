@@ -2,11 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ctrlProfiles = require('../controllers/profiles');
 var ctrlMatches = require('../controllers/matches');
-var ctrlAccounts = require('../controllers/accounts');
 
-/***************************
-*  'profiles' Controller
-****************************/
 
 // chat variables
 var ChatController = require('../controllers/chat');
@@ -22,10 +18,10 @@ var chatRoutes = express.Router();
 // router.delete('/profiles/:userid', ctrlProfiles.profilesDeleteOne);// Delete a specific user profile
 
 /***************************
-*  'account' Controller
+*  'profile' API Controller
 ****************************/
-router.post('/account', ctrlAccounts.accountPOSTapi);// Adds new user account
-router.put('/editProfile/:userid', ctrlAccounts.accountUpdateOne);// Update user profile
+router.post('/profile', ctrlProfiles.profilePOSTapi);// Adds new user profile
+router.put('/profile/:userid', ctrlProfiles.profileUpdateOne);// Update user profile
 
 
 /***************************

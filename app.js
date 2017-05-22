@@ -44,11 +44,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configure passport-local to use account model for authentication
-var Account = require('./app_api/models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+// Configure passport-local to use profile model for authentication
+var Profile = require('./app_api/models/profile');
+passport.use(new LocalStrategy(Profile.authenticate()));
+passport.serializeUser(Profile.serializeUser());
+passport.deserializeUser(Profile.deserializeUser());
 
 
 app.use('/', routes);

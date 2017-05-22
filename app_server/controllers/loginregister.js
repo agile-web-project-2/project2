@@ -74,7 +74,7 @@ module.exports.registerPOST = function(req, res) {
     // console.log(bday);
     //Convert rest of form to json for db
     var requestOptions, path, postdata;
-    path = "/api/account";
+    path = "/api/profile";
     postdata = {
         email: req.body.email,
         password: req.body.password,

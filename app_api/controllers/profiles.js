@@ -1,69 +1,77 @@
 // require('../models/db');
 // var mongoose = require('mongoose');
 // var profile = mongoose.model('Profile');
-//
-// var sendJsonResponse = function(res, status, content) {
-//     res.status(status);
-//     res.json(content);
-// };
-//
-// /* POST */
-// // api/profiles
-// module.exports.profilesCreate = function (req, res) {
-//     profile.create({
-//         username: req.body.username,
-//         dateOfBirth: req.body.dateOfBirth,
-//         gender: req.body.gender,
-//         aboutMe: req.body.aboutMe,
-//         coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
-//         // Create arrays, split by comma.
-//         interests: req.body.interests.split(","),
-//         gymMemberships: req.body.gymMemberships.split(",")
-//     // Supply Callback function providing success and failure
-//     }, function(err, profile) {
-//         if (err) {
-//             sendJsonResponse(res, 400, err);
-//         } else {
-//             sendJsonResponse(res, 200, profile);
-//         }
-//     });
-// };
-//
-// /* GET */
-// // api/profiles/:userid     (try: localhost:3000/api/profiles/590f1cd3f36d281fc3b965c1)
-// module.exports.profilesReadOne = function (req, res) {
-//     if (req.params && req.params.userid) { //Check that profileid exists in the request parameters
-//         profile
-//             .findById(req.params.userid) //Get userid from URL parameters and give it to findById method.
-//             .exec(function(err, profile) { //Define callback to accept possible parameters.
-//                 if (!profile) {
-//                     console.log("Return 404, no profile found")
-//                     sendJsonResponse(res, 404, {
-//                         "message": "profileid not found"
-//                     });
-//                     return;
-//                 } else if (err) {
-//                     console.log("Return 404, Mongoose has an error")
-//                     sendJsonResponse(res, 404, err)
-//                     return;
-//                 }
-//                 console.log("No errors in Mongoose, Send JSON doocument 200 response.")
-//                 sendJsonResponse(res, 200, profile);
-//             });
-//     } else {
-//         console.log("Return 404, parameters missing profileid")
-//         sendJsonResponse(res, 404, {
-//             "message": "No profileid in the request"
-//         });
-//     }
-//
-// };
-// module.exports.profilesDeleteOne = function (req, res) {
-//     sendJsonResponse(res, 200, {"status" : "success"});
-// };
-// module.exports.profilesUpdateOne = function (req, res) {
-//     sendJsonResponse(res, 200, {"status" : "success"});
-// };
-// module.exports.profilesFindAlgorithm = function (req, res) {
-//     sendJsonResponse(res, 200, {"status" : "success"});
-// };
+var Profile = require('../models/profile');
+
+var sendJsonResponse = function(res, status, content) {
+    res.status(status);
+    res.json(content);
+};
+
+
+/*******************
+*    /api/profile
+********************/
+/*POST*/
+/* Adds a new profile to the database  */
+module.exports.profilePOSTapi = function(req, res) {
+    Profile.register(new Profile({
+        username: req.body.email,
+        name: req.body.name,
+        gender: req.body.gender,
+        birthdate: req.body.birthdate}), req.body.password,
+        function(err, profile) {
+            if (err) {
+                console.log('There was an error while registering the email!', err);
+                console.log('profile: ' + profile);
+                sendJsonResponse(res, 400, err);
+            } else {
+                console.log('The email is registered!');
+                sendJsonResponse(res, 201, profile);
+            }
+
+        });
+};
+
+/*PUT*/
+/* Update user profile in database  */
+module.exports.profileUpdateOne = function(req, res) {
+    var query = {username: 'matt@matt.matt'};
+    var update = { $set: {about: 'This is about me.'}};
+    var options = {new: true, upsert: true};
+    var callback = function(err, profile) {
+        if(err) {
+            console.log("something went wrong when updating the data!", err);
+            console.log('profile: ', profile);
+            sendJsonResponse(res, 400, err);
+        } else {
+            console.log('The update to the user profile was successful!')
+            sendJsonResponse(res, 200, profile);
+        }
+    
+    };
+    Profile.findOneAndUpdate(query, update, options, callback);
+    // Account.save(function(err){
+    //     if(err)
+    //         res.send(err);
+    //         res.json({message: 'Gym info updated.'})
+    // });
+
+    // //New account model object
+    // var account = new Account();
+    // Account.findById(req.body._id, function(err, account){
+    //   if (err)
+    //     res.send(err);
+
+    //   //update
+    //   account.gym = req.body.gym;
+
+    //   //save
+    //   account.save(function(err){
+    //     if(err)
+    //       res.send(err);
+
+    //     res.json(account);
+    //   });
+    // });
+};
