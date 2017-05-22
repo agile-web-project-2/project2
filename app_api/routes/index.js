@@ -25,7 +25,6 @@ var chatRoutes = express.Router();
 *  'account' Controller
 ****************************/
 router.post('/account', ctrlAccounts.accountPOSTapi);// Adds new user account
-//router.get('/profile/:userid', ) //api route...?
 router.put('/editProfile/:userid', ctrlAccounts.accountUpdateOne);// Update user profile
 
 

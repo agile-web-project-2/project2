@@ -44,7 +44,7 @@ module.exports.login = function(req, res) {
 };
 /* POST */
 module.exports.loginPOST = function(req, res) {
-    res.redirect('/profile');
+    res.redirect('/profile/'+req.user.id);
 };
 
 /******************
