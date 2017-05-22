@@ -29,3 +29,20 @@ module.exports.accountPOSTapi = function(req, res) {
 
         });
 };
+
+/*PUT*/
+/* Update user profile in database  */
+module.exports.accountUpdateOne = function(req, res) {
+    var query = {'username': req.body.email};
+    var update = {gym: req.body.gym}
+    Account.findOneAndUpdate(query, update, options, function(err, account){
+      if (err){
+        console.log('we have an update error');
+      };
+    });
+    Account.save(function(err){
+      if(err)
+        res.send(err);
+        res.json({message: 'Gym info updated.'})
+    });
+};

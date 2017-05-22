@@ -117,7 +117,7 @@ module.exports.registerPOST = function(req, res) {
 /*********************
 *  'Edit Profile' page
 **********************/
-/*GET*/
+/*GET ------ PAGE NOT USED ATM*/
 module.exports.editProfile = function(req, res) {
     res.render('editProfile', {
         title: 'Edit Profile',
@@ -141,9 +141,9 @@ module.exports.profile = function(req, res) {
   }
   x = year + '-' + month + '-' + dt;
 
-    res.render('profile', {
-        title: 'Profile',
-        user: req.user,
-        birthdate: x
-    });
+  res.render('profile', {
+      title: 'Profile',
+      user: req.user,
+      birthdate: x
+  });
 };
