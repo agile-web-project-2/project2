@@ -8,7 +8,11 @@ var accountSchema = new mongoose.Schema({
     email: String,
     password: String,
     gender: String,
-    birthdate: Date
+    birthdate: Date,
+    gym: [String],
+    interests: [String],
+    address: String,
+    about: String
 });
 
 accountSchema.plugin(passportLocalMongoose);
