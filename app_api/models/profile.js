@@ -9,8 +9,10 @@ var profileSchema = new mongoose.Schema({
     password: String,
     gender: String,
     birthdate: Date,
-    gym: [String],
-    interests: [String],
+    gym: String,
+    interest1: String,
+    interest2: String,
+    interest3: String,
     address: String,
     about: String
 });

@@ -84,9 +84,9 @@ module.exports.registerPOST = function(req, res) {
     };
 
     requestOptions = {
-      url : apiOptions.server + path,
-      method : "POST",
-      json : postdata
+        url : apiOptions.server + path,
+        method : "POST",
+        json : postdata
     };
     console.log(postdata.email);
     console.log(postdata.password);
@@ -100,8 +100,7 @@ module.exports.registerPOST = function(req, res) {
         request(requestOptions, function(err, response, body) {
                 if (err) {
                     console.log(err);
-                } else if (response.statusCode === 201) {
-                  //Success
+                } else if (response.statusCode === 201) { //Success
                     res.redirect('/login');
                 } else if (response.statusCode === 400 && body.email && body.email === "ValidationError" ) {
                     res.flash('danger', 'Invalid');
@@ -124,6 +123,39 @@ module.exports.editProfile = function(req, res) {
         user: req.user
     });
 };
+
+/*POST*/
+module.exports.editProfilePOST = function(req, res) {
+    var path, putdata, requestOptions;
+
+    // console.log('  req.user.id:  ', req.user.id);
+    // console.log('  req.user.about:  ', req.user.about);
+
+    path = "/api/profile/"+req.user.id;
+    putdata = {
+        about: req.user.about
+    };
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "PUT",
+        json: putdata
+    };
+    request(requestOptions, function(err, response, body) {
+        if (err) {
+            console.log(err);
+        } else if (response.statusCode === 200) { //Success
+            res.redirect('/profile/'+req.user.id);
+        } else if (response.statusCode === 400 ) {
+            res.flash('danger', 'Invalid');
+            res.redirect('/profile?err=val');
+        } else {
+            console.log(body);
+            _showError(req, res, response.statusCode);
+        }
+    });
+};
+
+
 
 /*GET*/
 module.exports.profile = function(req, res) {

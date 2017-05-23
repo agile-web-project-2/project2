@@ -36,8 +36,9 @@ module.exports.profilePOSTapi = function(req, res) {
 /*PUT*/
 /* Update user profile in database  */
 module.exports.profileUpdateOne = function(req, res) {
+    console.log('module.exports.profileUpdateOne: ---> req.body: ', req.body)
     var query = {username: 'matt@matt.matt'};
-    var update = { $set: {about: 'This is about me.'}};
+    var update = { $set: {about: 'I want to sleep now.'}};
     var options = {new: true, upsert: true};
     var callback = function(err, profile) {
         if(err) {

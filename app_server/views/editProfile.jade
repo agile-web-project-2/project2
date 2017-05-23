@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   br
-  form(action="/update" method="post")
+  form(action="/profile/"+user.id, method="post")
     .form-group
       br
       .col-md-6 
@@ -17,25 +17,25 @@ block content
        
        p Address:
        br
-       input#street.form-control(type='text' value='')
-       input#city.form-control(type='text' value='')
-       input#Country.form-control(type='text' value='')
+       input#street.form-control(type='text' value='', name='street')
+       input#city.form-control(type='text' value='', name='city')
+       input#Country.form-control(type='text' value='', name='country')
       .col-md-6
         p Interests:
-        input#interest1.form-control(type='text' value='')
-        input#interest2.form-control(type='text' value='')
-        input#interest3.form-control(type='text' value='') 
+        input#interest1.form-control(type='text' value='', name='interest1')
+        input#interest2.form-control(type='text' value='', name='interest2')
+        input#interest3.form-control(type='text' value='', name='interest3') 
         br  
         p Gym:
         br
-        input#gym.form-control(type='text' value='')
+        input#gym.form-control(type='text' value='', name='gym')
         br
         p About Me:
-        textarea#aboutMe.form-control(rows='4', cols='20')
+        textarea#aboutMe.form-control(rows='4', cols='20', name='about')
         br
 
-  //NEED TO DO AN POST REQ UPDATE OF USER'S PROFILE ON SERVER SIDE
-  input.btn.btn-default(type='submit', value='Update')
+      //- NEED TO DO AN POST REQ UPDATE OF USER'S PROFILE ON SERVER SIDE
+      input.btn.btn-default(type='submit', value='Update')
 
 
     
@@ -43,21 +43,21 @@ block content
   script.
     //Populate with INTEREST data from db
     //Might change input text to dropdown box with pre-defined values later
-    var interest1Var = "#{interest1}"; //unique var
+    var interest1Var = "#{user.interest1}"; //unique var
     if (interest1Var == ''){
       document.getElementById('interest1').placeholder = "Enter an interest e.g. Gym";
     } else {
       document.getElementById('interest1').value = interest1Var;
     }
     
-    var interest2Var = "#{interest2}"; //unique var
+    var interest2Var = "#{user.interest2}"; //unique var
     if (interest2Var == ''){
       document.getElementById('interest2').placeholder = "Enter an interest e.g. Running";
     } else {
       document.getElementById('interest2').value = interest2Var;
     }
     
-    var interest3Var = "#{interest1}"; //unique var
+    var interest3Var = "#{user.interest3}"; //unique var
     if (interest3Var == ''){
       document.getElementById('interest3').placeholder = "Enter an interest e.g. Tennis";
     } else {
@@ -73,7 +73,7 @@ block content
     }
     
     //Populate with DESCRIPTION data from db
-    var aboutMeVar = "#{user.aboutMe}";
+    var aboutMeVar = "#{user.about}";
     if (aboutMeVar == ''){
       document.getElementById('aboutMe').placeholder = "Enter a description";
     } else {
@@ -81,21 +81,21 @@ block content
     }
     
     //Populate with ADDRESS data from db
-    var streetVar = "#{streetAddress}"; //use unique var from loginregister.js GET request
+    var streetVar = "#{user.street}"; //use unique var from loginregister.js GET request
     if (streetVar == ''){
       document.getElementById('street').placeholder = "Street";
     } else {
       document.getElementById('street').value = streetVar;
     }
 
-    var cityVar = "#{cityAddress}";
+    var cityVar = "#{user.city}";
     if (cityVar == ''){
       document.getElementById('city').placeholder = "City";
     } else {
       document.getElementById('city').value = cityVar;
     }
     
-    var countrytVar = "#{countryAddress}";
+    var countrytVar = "#{user.country}";
     if (countrytVar == ''){
       document.getElementById('Country').placeholder = "Country";
     } else {

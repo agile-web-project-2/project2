@@ -17,6 +17,7 @@ router.get('/register', ctrlLoginReg.register);// Register page
 router.post('/register', ctrlLoginReg.registerPOST);// Register page
 router.get('/editProfile', ctrlLoginReg.editProfile);// Find Edit Profile page
 router.get('/profile/:userid', ctrlLoginReg.profile);// Profile page
+router.post('/profile/:userid', ctrlLoginReg.editProfilePOST);// Profile page
 
 
 /***************************

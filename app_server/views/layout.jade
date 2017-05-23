@@ -40,7 +40,7 @@ html(lang='en')
               .masthead.clearfix
                 if (user)
                   .login-status
-                  p Welcome, #{user.username}!
+                  p Welcome, #{user.name}!
                 .inner
                   h3.masthead-brand.logo 
                     a.logo(href="/") Pairletes              
@@ -58,7 +58,7 @@ html(lang='en')
                       
                       if (user)
                         li 
-                          a(href="/profile") Profile
+                          a(href="/profile/"+user.id) Profile
                         li.active
                           a(href="/logout") Logout
                           
