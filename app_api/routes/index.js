@@ -2,12 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ctrlProfiles = require('../controllers/profiles');
 var ctrlMatches = require('../controllers/matches');
-
-
-// chat variables
-var ChatController = require('../controllers/chat');
-var apiRoutes = express.Router();
-var authRoutes = express.Router();
+var chatController = require('../controllers/chat');
 var chatRoutes = express.Router();
 
 // // profiles
@@ -42,17 +37,18 @@ router.post('/profiles/:userid/matchAccept/:matchid', ctrlMatches.matchesAcceptA
 router.delete('/profiles/:userid/matchAccept/:matchid', ctrlMatches.matchesAcceptDelete);
 // Delete a spcific accepted match
 
-// Chat
-// Set chat routes as a subgroup/middleware to apiRoutes
-apiRoutes.use('/chat', chatRoutes);
+/***************************
+*   'chat' Controller
+***************************/
+
 // View messages to and from authenticated user
-chatRoutes.get('/', ChatController.getChats);
+chatRoutes.get('/chat', chatController.getChats);
 // Retrieve single conversation
-chatRoutes.get('/:chatId', ChatController.getChat);
+chatRoutes.get('/chat/:chatId', chatController.getChat);
 // Send reply in conversation
-chatRoutes.post('/:chatId', ChatController.sendReply);
+chatRoutes.post('/chat/:chatId', chatController.sendReply);
 // Start new conversation
-chatRoutes.post('/new/:recipient', ChatController.newChat);
+chatRoutes.post('/chat/new/:recipient', chatController.newChat);
 
 
 module.exports = router;

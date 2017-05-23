@@ -1,0 +1,7 @@
+extends layout
+
+block content
+ ul(id="conversation")
+ form(action="", id="messageBox", onSubmit='return false;')
+  input(id="message", autocomplete="off")
+  button(type="button", onClcik='send();') Send

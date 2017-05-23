@@ -12,26 +12,25 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Lobster+Two', rel='stylesheet')
 
       
-    //- script(src="/socket.io/socket.io.js")
-    //- script(src="http://code.jquery.com/jquery-1.11.1.js")
-    //- script.
-        //- console.log('loading script');
-        //- var socket = io();
-        //- console.log('connected');
+    script(src="/socket.io/socket.io.js")
+    script(src="http://code.jquery.com/jquery-1.11.1.js")
+    script.
+        jQuery(function($){
+            var socket = io.connect();
+            var $msgForm = $('#msgForm');
+            var $msgBox = $('#message');
+            var $chat = $('#chatWindow');
 
-        //- function send(){
-        //-   console.log('send');
-        //-   var message = document.getElementById('message');
-        //-   socket.emit('message', message.value);
-        //-   message.value = '';
-        //- };
+            $msgForm.submit(function(e){
+                e.preventDefault();
+                socket.emit('send message', $msgBox.value());
+                messageBox.val('');
+            });
 
-        //- socket.on('message', function(msg){
-        //-   var messages = document.getElementById('messages');
-        //-   var newText = document.createElement('li');
-        //-   newText.innerHTML = msg;
-        //-   messages.appendChild(newText);
-        //- });
+            socket.on('new message', function(data){
+                $chat.append(data + "<br/>");
+            });
+        });
 
   body
     .site-wrapper
@@ -68,18 +67,8 @@ html(lang='en')
                 block content
               .mastfoot
                 .inner
-                  p &copy; 2017 Matthew Seneque, Kieran Quirke-Brown and Debbie Yung 
+                  p &copy; 2017 Matthew Seneque, Kieran Quirke-Brown and Debbie Yung
 
-
-      
-    //- #chatwindow(width='20%', float='right')
-    //-   ul(id="messages")
-    //-     li First Post!
-      
-    //-   form(action="", id='msgForm', onSubmit='return false;')
-    //-       input(id="message" autocomplete="off")
-    //-       button(type='button', onClick='send();') Send
-    
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-    script(src='/js/bootstrap.js')
     script(src='/js/jquery-3.2.1.min.js')
+    script(src='/js/bootstrap.min.js')
