@@ -127,13 +127,17 @@ module.exports.editProfile = function(req, res) {
 /*POST*/
 module.exports.editProfilePOST = function(req, res) {
     var path, putdata, requestOptions;
-
-    // console.log('  req.user.id:  ', req.user.id);
-    // console.log('  req.user.about:  ', req.user.about);
-
+    console.log(" ----------------> request body server: ", req.body);
     path = "/api/profile/"+req.user.id;
     putdata = {
-        about: req.user.about
+        street: req.body.street,
+        city: req.body.city,
+        country: req.body.country,
+        interest1: req.body.interest1,
+        interest2: req.body.interest2,
+        interest3: req.body.interest3,
+        gym: req.body.gym,
+        about: req.body.about
     };
     requestOptions = {
         url: apiOptions.server + path,

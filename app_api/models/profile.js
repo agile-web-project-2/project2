@@ -13,7 +13,9 @@ var profileSchema = new mongoose.Schema({
     interest1: String,
     interest2: String,
     interest3: String,
-    address: String,
+    street: String,
+    city: String,
+    country: String,
     about: String
 });
 

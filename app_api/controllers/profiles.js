@@ -29,16 +29,28 @@ module.exports.profilePOSTapi = function(req, res) {
                 console.log('The email is registered!');
                 sendJsonResponse(res, 201, profile);
             }
-
         });
 };
 
 /*PUT*/
 /* Update user profile in database  */
 module.exports.profileUpdateOne = function(req, res) {
-    console.log('module.exports.profileUpdateOne: ---> req.body: ', req.body)
-    var query = {username: 'matt@matt.matt'};
-    var update = { $set: {about: 'I want to sleep now.'}};
+    console.log("my user id: ", req.params.userid);
+    console.log(" ----------------> request body api: ", req.body);
+
+    var query = {_id: req.params.userid};
+    var update = { 
+        $set: {  
+            street: req.body.street,
+            city: req.body.city,
+            country: req.body.country,
+            interest1: req.body.interest1,
+            interest2: req.body.interest2,
+            interest3: req.body.interest3,
+            gym: req.body.gym,
+            about: req.body.about
+        }
+    };
     var options = {new: true, upsert: true};
     var callback = function(err, profile) {
         if(err) {
@@ -48,6 +60,7 @@ module.exports.profileUpdateOne = function(req, res) {
         } else {
             console.log('The update to the user profile was successful!')
             sendJsonResponse(res, 200, profile);
+            console.log('module.exports.profileUpdateOne: ---> req.body: ', req.body)
         }
     
     };
