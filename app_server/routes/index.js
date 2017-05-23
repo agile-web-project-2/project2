@@ -25,7 +25,6 @@ router.post('/profile/:userid', ctrlLoginReg.editProfilePOST);// Profile page
 ****************************/
 router.get('/findMatch', ctrlMatch.match);
 
-
 /***************************
 *    'others' Controller
 ****************************/

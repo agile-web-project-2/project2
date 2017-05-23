@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var ctrlProfiles = require('../controllers/profiles');
 var ctrlMatches = require('../controllers/matches');
-var ctrlAccounts = require('../controllers/accounts');
 var chatController = require('../controllers/chat');
 var chatRoutes = express.Router();
 
@@ -12,11 +11,6 @@ router.get('/profiles', ctrlProfiles.profilesFindAlgorithm);// Read list of prof
 router.get('/profiles/:userid', ctrlProfiles.profilesReadOne);// Read a specific user profile
 router.put('/profiles/:userid', ctrlProfiles.profilesUpdateOne);// Update a specific user Profile
 router.delete('/profiles/:userid', ctrlProfiles.profilesDeleteOne);// Delete a specific user profile
-// chat variables
-var ChatController = require('../controllers/chat');
-var apiRoutes = express.Router();
-var authRoutes = express.Router();
-var chatRoutes = express.Router();
 
 // // profiles
 // router.post('/profiles', ctrlProfiles.profilesCreate);// Create new user profile
