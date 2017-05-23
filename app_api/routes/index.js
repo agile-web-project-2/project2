@@ -5,13 +5,6 @@ var ctrlMatches = require('../controllers/matches');
 var chatController = require('../controllers/chat');
 var chatRoutes = express.Router();
 
-// profiles
-router.post('/profiles', ctrlProfiles.profilesCreate);// Create new user profile
-router.get('/profiles', ctrlProfiles.profilesFindAlgorithm);// Read list of profiles
-router.get('/profiles/:userid', ctrlProfiles.profilesReadOne);// Read a specific user profile
-router.put('/profiles/:userid', ctrlProfiles.profilesUpdateOne);// Update a specific user Profile
-router.delete('/profiles/:userid', ctrlProfiles.profilesDeleteOne);// Delete a specific user profile
-
 // // profiles
 // router.post('/profiles', ctrlProfiles.profilesCreate);// Create new user profile
 // router.get('/profiles', ctrlProfiles.profilesFindAlgorithm);// Read list of profiles
