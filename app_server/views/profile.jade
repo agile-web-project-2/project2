@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+  br
+  .col-md-6 Name: 
+    h3 #{user.name}
+    br
+    p Email:
+    h3 #{user.username}
+    br
+    p Gender: 
+    h3 #{user.gender}
+    br
+    p Birthday: 
+    h3 #{birthdate}
+    br
+    br
+    a(href='/editProfile')
+      button.btn.btn-default(type='button') Edit Profile
+
+    
+  .col-md-6 
+    p Gym:
+    h3 #{user.gym}
+    br
+    p Interests:
+    h3 #{user.interest1}
+    br
+    h3 #{user.interest2}
+    br
+    h3 #{user.interest3}
+    br
+    p Address:
+    h3 #{addressFull} 
+    //- unique var
+    br
+    p About Me:
+    p #{user.about}
+
+
+  br
+  

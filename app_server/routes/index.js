@@ -16,6 +16,8 @@ router.get('/logout', ctrlLoginReg.logout);// Logout page
 router.get('/register', ctrlLoginReg.register);// Register page
 router.post('/register', ctrlLoginReg.registerPOST);// Register page
 router.get('/editProfile', ctrlLoginReg.editProfile);// Find Edit Profile page
+router.get('/profile/:userid', ctrlLoginReg.profile);// Profile page
+router.post('/profile/:userid', ctrlLoginReg.editProfilePOST);// Profile page
 
 
 /***************************
@@ -29,6 +31,7 @@ router.get('/findMatch', ctrlMatch.match);
 ****************************/
 router.get('/', ctrlOthers.homepage);// Home page
 router.get('/about', ctrlOthers.about);// Other pages
+
 
 
 module.exports = router;

@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('cookie-session');
 var bodyParser = require('body-parser');
+// var expressValidator = require('express-validator');
+// var flash = require('connect-flash');
+
+
 
 // Pasport
 var passport = require('passport');
@@ -30,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
 // session keys for passport
 app.use(session({keys: ['secretkey1', 'secretkey2', '...']}));
 
@@ -39,11 +44,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configure passport-local to use account model for authentication
-var Account = require('./app_api/models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+// Configure passport-local to use profile model for authentication
+var Profile = require('./app_api/models/profile');
+passport.use(new LocalStrategy(Profile.authenticate()));
+passport.serializeUser(Profile.serializeUser());
+passport.deserializeUser(Profile.deserializeUser());
 
 
 app.use('/', routes);
@@ -51,12 +56,7 @@ app.use('/api', routesAPI);
 
 // app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+
 
 // error handlers
 

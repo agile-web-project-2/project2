@@ -5,21 +5,42 @@ block content
   .frame
     p Enter your details here
     br
-    form(action="/register",method="post")
+    form(action="/register" method="post")
       .form-group
-        label(for='email') Email:
-        |  
+        label(for='name') Name: 
+        input#name.form-control(type='text', placeholder='Enter your name', name='name')
+
+        
+      .form-group
+        label(for='email') Email: 
         input#email.form-control(type='email', placeholder='Enter email', name='email')
+
+        
       .form-group
-        label(for='password') Password:
-        |  
-        input#pwd.form-control(type='password', placeholder='Enter password', name='password')
-      .checkbox
-        label
-          input(type='checkbox', name='remember')
-          |  Remember me
-      |  
+        label(for='password') Password:  
+        input#pwd.form-control(type='password', placeholder='Enter password', name='password', autocomplete="new-password")
+
+        
+      .form-group
+        label(for='gender') Gender:  
+        select#gender.form-control(name='gender')
+          option(value='Female') Female
+          option(value='Male') Male     
+
+      .form-group
+        label Birthday: 
+        br 
+        input#day.dobForm(type='text', placeholder='dd', name='day', maxlength=2)
+        input#mth.dobForm(type='text', placeholder='mm', name='mth', maxlength=2)
+        input#yr.dobForm(type='text', placeholder='yyyy', name='yr', maxlength=4)
+        p lets just assume people will input the correct date for now
+
+              
       input.btn.btn-default(type='submit', value='Register')
 
       if (errMessage)
         p #{errMessage}
+        
+
+
+        

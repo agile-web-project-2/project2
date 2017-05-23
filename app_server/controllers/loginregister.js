@@ -1,3 +1,5 @@
+var validator = require('validator');
+
 /* Request needed to GET data to the views */
 var request = require('request');
 var apiOptions = {
@@ -42,7 +44,7 @@ module.exports.login = function(req, res) {
 };
 /* POST */
 module.exports.loginPOST = function(req, res) {
-    res.redirect('/');
+    res.redirect('/profile/'+req.user.id);
 };
 
 /******************
@@ -67,12 +69,20 @@ module.exports.register = function(req, res) {
 /*POST*/
 /* action to register a new user */
 module.exports.registerPOST = function(req, res) {
+    //Parse birthdate ready for mongodb
+    var bday = req.body.yr + '-' + req.body.mth + '-' + req.body.day;
+    // console.log(bday);
+    //Convert rest of form to json for db
     var requestOptions, path, postdata;
-    path = "/api/account";
+    path = "/api/profile";
     postdata = {
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        name: req.body.name,
+        gender: req.body.gender,
+        birthdate: bday
     };
+
     requestOptions = {
         url : apiOptions.server + path,
         method : "POST",
@@ -80,15 +90,20 @@ module.exports.registerPOST = function(req, res) {
     };
     console.log(postdata.email);
     console.log(postdata.password);
+    console.log(postdata.name);
+    console.log(postdata.gender);
+    console.log(postdata.birthdate);
+
     if (!postdata.email || !postdata.password) {
     res.redirect('/register?err=val');
     } else {
         request(requestOptions, function(err, response, body) {
                 if (err) {
                     console.log(err);
-                } else if (response.statusCode === 201) {
+                } else if (response.statusCode === 201) { //Success
                     res.redirect('/login');
                 } else if (response.statusCode === 400 && body.email && body.email === "ValidationError" ) {
+                    res.flash('danger', 'Invalid');
                     res.redirect('/register?err=val');
                 } else {
                     console.log(body);
@@ -101,9 +116,66 @@ module.exports.registerPOST = function(req, res) {
 /*********************
 *  'Edit Profile' page
 **********************/
-/*GET*/
+/*GET ------ PAGE NOT USED ATM*/
 module.exports.editProfile = function(req, res) {
     res.render('editProfile', {
-        title: 'Edit Profile'
+        title: 'Edit Profile',
+        user: req.user
     });
+};
+
+/*POST*/
+module.exports.editProfilePOST = function(req, res) {
+    var path, putdata, requestOptions;
+
+    // console.log('  req.user.id:  ', req.user.id);
+    // console.log('  req.user.about:  ', req.user.about);
+
+    path = "/api/profile/"+req.user.id;
+    putdata = {
+        about: req.user.about
+    };
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: "PUT",
+        json: putdata
+    };
+    request(requestOptions, function(err, response, body) {
+        if (err) {
+            console.log(err);
+        } else if (response.statusCode === 200) { //Success
+            res.redirect('/profile/'+req.user.id);
+        } else if (response.statusCode === 400 ) {
+            res.flash('danger', 'Invalid');
+            res.redirect('/profile?err=val');
+        } else {
+            console.log(body);
+            _showError(req, res, response.statusCode);
+        }
+    });
+};
+
+
+
+/*GET*/
+module.exports.profile = function(req, res) {
+  var x = new Date(req.user.birthdate);
+  var year = x.getFullYear();
+  var month = x.getMonth()+1;
+  var dt = x.getDate();
+
+  if (dt < 10) {
+  dt = '0' + dt;
+  }
+
+  if (month < 10) {
+  month = '0' + month;
+  }
+  x = year + '-' + month + '-' + dt;
+
+  res.render('profile', {
+      title: 'Profile',
+      user: req.user,
+      birthdate: x
+  });
 };
