@@ -63,3 +63,5 @@ process.on('SIGTERM', function() {
 /*      IMPORT YOUR MODELS       */
 /*********************************/
 require('./profile');
+require('./chat');
+require('./message');

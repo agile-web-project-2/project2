@@ -1,0 +1,8 @@
+extend layout
+
+block content
+    #chatWindow
+        
+    form(action="", id='msgForm', onSubmit='return false;')
+        input(id="message" autocomplete="off")
+        button(style="color: black;", type='button', onClick='send();')Send

@@ -1,10 +1,15 @@
 "use strict"
-var Chat = require('../models/chat'),
-    Message = require('../models/message'),
-    //User = require('../models/user');
+require('../models/db');
+var Chat = require('../models/chat');
+var Message = require('../models/message');
 
-getChats = function(req, res, next){
-    //displays one message from conversation
+var sendJsonResponse = function(res, status, content){
+    res.status(status);
+    res.json(content);
+};
+    
+//gets all chats for the user and displays with a portion of last message
+module.exports.getChats = function(req, res, next){
     Chat.find({ participants: req.user._id})
         .select('_id')
         .exec(function(err, chats){
@@ -13,7 +18,7 @@ getChats = function(req, res, next){
                  return next(err);
              }
              
-             // array containing conversation
+             // array containing all current conversations
              let fullChats = [];
              chats.forEach(function(chat){
                  Message.find({'chatId': chat._id})
@@ -30,14 +35,15 @@ getChats = function(req, res, next){
                          }
                          fullChats.push(message);
                          if(fullChats.length === chats.length){
-                             return res.status(200).json({ chats: fullChats });
+                              sendJsonRepsonse(res, 200, {chats: fullChats});
                          }
                      });
              });
         });  
 }
 
-exports.getChat = function(req, res, next){
+//get all messages for single conversation
+module.exports.getChat = function(req, res, next){
     Message.find({ chatId: req.params.chatId })
         .select('createdAt body author')
         .sort('-createdAt')
@@ -50,22 +56,25 @@ exports.getChat = function(req, res, next){
                 res.send({ error: err});
                 return next(err);
             }
-
-            res.status(200).json({chat: messages });
+            sendJsonResponse(res, 200, {chat: messages});
         });
 }
 
-exports.newChat = function(req, res, next) {
+//start up a new conversation
+module.exports.newChat = function(req, res, next) {
+    //check recipient id is valid
     if(!req.params.recipient) {
-        res.status(422).send({error: 'Please choose a valid recipient for your message.'});
+        sendJsonResponse(res, 422, {error: 'Please choose a valid recipient for your message.'});
         return next();
     }
 
+    //check there is a message sent
     if(!req.body.composedMessage){
-        res.status(422).send({error: 'Please enter a message.'});
+        sendJsonResponse(res, 422, {error: 'Please enter a message.'});
         return next();
     }
 
+    //creates chat in database
     var chat = new Chat({
         participants: [req.user._id, req.params.recipient]
     });
@@ -76,6 +85,7 @@ exports.newChat = function(req, res, next) {
             return next(err);
         }
 
+        //creates new message to add to database
         var message = new Message({
             chatId: newChat._id,
             body: req.body.composeMessage,
@@ -87,14 +97,14 @@ exports.newChat = function(req, res, next) {
                 res.send({error: err});
                 return next(err);
             }
-
-            res.status(200).json({message: 'Conversation started!', chatId: chat._id});
+            sendJsonResponse(res, 200, {message: 'Conversation started!', chatId: chat._id});
             return next();
         });
     });
 }
 
-exports.sendReply = function(req, res, next){
+//send a message
+module.exports.sendReply = function(req, res, next){
     var reply = new Message({
         chatId: req.params.chatId,
         body: req.body.composedMessage,
@@ -103,17 +113,18 @@ exports.sendReply = function(req, res, next){
 
     reply.save(function(err, sentReply){
         if(err){
+            console.log(err);
+            res.status(500);
             res.send({error: err});
             return next(err);
         }
-
-        res.status(200).json({ message: 'Reply successfully sent!' });
+        else{
+	    console.log(sentReply, 'message saved');
+	}
+        sendJsonRepsonse(res, 200, { message: 'Reply successfully sent!' });
         return(next);
     });
 }
-
-
-exports.getChats = getChats;
 
 
 
